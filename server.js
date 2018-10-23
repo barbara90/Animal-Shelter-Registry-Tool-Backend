@@ -52,7 +52,7 @@ app.patch('/animal/:_id', (req, res) => {
 //Delete an element from animals
 app.delete('/animal/:_id', (req, res) => {
     let id = req.params._id;
-    Animals.deleteAnimal(id, (err, animals) => {
+    Animals.removeAnimal(id, (err, animals) => {
         if (err) {
             throw err;
         }
@@ -85,7 +85,7 @@ app.post('/owner', (req, res) => {
     });
 });
 //Update a data in an existing element in owners
-app.patch('/owner', (req, res) => {
+app.patch('/owner/:_id', (req, res) => {
     let id = req.params._id;
     let owner = req.body;
     Owners.updateOwner(id, owner, {}, (err, owner) => {
@@ -94,9 +94,9 @@ app.patch('/owner', (req, res) => {
     });
 });
 //Delete an element from owners
-app.delete('/owner', (req, res) => {
+app.delete('/owner/:_id', (req, res) => {
     let id = req.params._id;
-    Owners.deleteOwner(id, (err, owner) => {
+    Owners.removeOwner(id, (err, owner) => {
         if (err) {
             throw err;
         }

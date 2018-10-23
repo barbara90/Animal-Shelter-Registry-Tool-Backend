@@ -62,7 +62,7 @@ const updateOwner = (id, owner, options, callback) => {
     Owners.findOneAndUpdate(query, update, options, callback);
 }
 
-const deleteOwner = (id, callback) => {
+const removeOwner = (id, callback) => {
     let query = {_id: id};
     Owners.remove(query, callback);
 }
@@ -74,5 +74,5 @@ module.exports = {
     getOwnerById: getOwnerById,
     addOwners: addOwners,
     updateOwner: updateOwner,
-    deleteOwner: deleteOwner
+    removeOwner: removeOwner
 }

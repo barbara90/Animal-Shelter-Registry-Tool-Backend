@@ -62,7 +62,7 @@ const updateAnimal = (id, animal, options, callback) => {
     Animals.findOneAndUpdate(query, update, options, callback);
 }
 
-const deleteAnimal = (id, callback) => {
+const removeAnimal = (id, callback) => {
     let query = { _id: id };
     Animals.remove(query, callback);
 }
@@ -73,5 +73,5 @@ module.exports = {
     getAnimalById: getAnimalById,
     addAnimals: addAnimals,
     updateAnimal: updateAnimal,
-    deleteAnimal: deleteAnimal
+    removeAnimal: removeAnimal
 }
