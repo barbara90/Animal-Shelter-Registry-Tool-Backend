@@ -15,7 +15,7 @@ MongoClient.connect(url, function (err, db) {
  */
 MongoClient.connect(url, function (err, db) {
     if (err) throw err;
-    let dbo = db.db("animalshelterregister");
+    const dbo = db.db("animalshelterregister");
     dbo.createCollection("animals", function (err, res) {
         if (err) throw err;
         console.log("Collection created!");
@@ -28,7 +28,7 @@ MongoClient.connect(url, function (err, db) {
  */
 MongoClient.connect(url, function (err, db) {
     if (err) throw err;
-    let dbo = db.db("animalshelterregister");
+    const dbo = db.db("animalshelterregister");
     dbo.createCollection("owners",function (err, res) {
         if (err) throw err;
         console.log("Collection created!");
@@ -41,7 +41,7 @@ MongoClient.connect(url, function (err, db) {
  */
 MongoClient.connect(url, function (err, db) {
     if (err) throw err;
-    let dbo = db.db("animalshelterregister");
+    const dbo = db.db("animalshelterregister");
     const animals = [
         {
             adopted: false,
@@ -64,7 +64,7 @@ MongoClient.connect(url, function (err, db) {
             color: 'white',
             notes: ''
         }];
-    dbo.collection('animals').insertMany(animals, function (err, res) {
+    dbo.collection('animals').insertMany(animals, function (err) {
         if (err) throw err;
         console.log('1 document inserted into animals');
         db.close();
@@ -76,8 +76,8 @@ MongoClient.connect(url, function (err, db) {
  */
 MongoClient.connect(url, function (err, db) {
     if (err) throw err;
-    let dbo = db.db("animalshelterregister");
-    let owner = {
+    const dbo = db.db("animalshelterregister");
+    const owner = {
         name: 'OwnerTest', 
         contact: {
             phoneNumber: '423651', address: {

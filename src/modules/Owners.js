@@ -30,7 +30,6 @@ const ownerSchema = mongoose.Schema({
         }
     },
     notes: {
-        //type: Object.Schema.Types.Mixed
     }
 });
 
@@ -49,8 +48,8 @@ const addOwner = (owner, callback) => {
 }
 
 const updateOwner = (id, owner, options, callback) => {
-        let query = {_id: id};
-        let update = {
+        const query = {_id: id};
+        const update = {
             name: owner.name,
             phoneNumber: owner.phoneNumber,
             postCode: owner.postCode,
@@ -63,7 +62,7 @@ const updateOwner = (id, owner, options, callback) => {
 }
 
 const removeOwner = (id, callback) => {
-    let query = {_id: id};
+    const query = {_id: id};
     Owners.remove(query, callback);
 }
 
