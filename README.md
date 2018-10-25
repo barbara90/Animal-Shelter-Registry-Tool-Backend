@@ -1,6 +1,6 @@
 #Prerequisites
- MongoDB (at least 4.0): https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
- node (at least 8.9.4) and npm (at least 5.6.0)
+- MongoDB (at least 4.0): https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
+- node (at least 8.9.4) and npm (at least 5.6.0)
 
 #Configuration of MongoDB:
 https://docs.mongodb.com/manual/reference/configuration-options/
