@@ -1,38 +1,38 @@
 const mongoose = require('mongoose');
 
 const ownerSchema = mongoose.Schema({
-                name: {
-                    type: "string",
-                    required: true
-                },
-                contact: {
-                    phoneNumber: {
-                        type: "string",
-                        required: true
-                    },
-                    address: {
-                        postCode: {
-                            type: "string",
-                            required: true
-                        },
-                        city: {
-                            type: "string",
-                            required: true
-                        },
-                        street: {
-                            type: "string",
-                            required: true
-                        },
-                        houseNumber: {
-                            type: "string",
-                            required: true
-                        },
-                    }
-                },
-                notes: {
-                   // type: Schema.Types.Mixed
-                }
-    });
+    name: {
+        type: "string",
+        required: true
+    },
+    contact: {
+        phoneNumber: {
+            type: "string",
+            required: true
+        },
+        address: {
+            postCode: {
+                type: "string",
+                required: true
+            },
+            city: {
+                type: "string",
+                required: true
+            },
+            street: {
+                type: "string",
+                required: true
+            },
+            houseNumber: {
+                type: "string",
+                required: true
+            },
+        }
+    },
+    notes: {
+        //type: Object.Schema.Types.Mixed
+    }
+});
 
 const Owners = mongoose.model('Owners', ownerSchema);
 
@@ -44,7 +44,7 @@ const getOwnerById = (id, callback) => {
     Owners.findById(id, callback);
 }
 
-const addOwners = (owner, callback) => {
+const addOwner = (owner, callback) => {
     Owners.create(owner, callback);
 }
 
@@ -72,7 +72,7 @@ module.exports = {
     Owners: Owners,
     getOwners: getOwners,
     getOwnerById: getOwnerById,
-    addOwners: addOwners,
+    addOwner: addOwner,
     updateOwner: updateOwner,
     removeOwner: removeOwner
 }

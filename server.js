@@ -19,6 +19,7 @@ app.get('/animal', (req, res) => {
         res.json(animals);
     });
 });
+
 //Get one element from animals
 app.get('/animal/:_id', (req, res) => {
     Animals.getAnimalById(req.params._id, (err, animals) => {
@@ -28,16 +29,18 @@ app.get('/animal/:_id', (req, res) => {
         res.json(animals);
     });
 });
+
 //Create new element in animals
 app.post('/animal', (req, res) => {
-    let animals = req.body;
-    Animals.addAnimals(animals, (err, animals) => {
-        if(err) {
+    const animal = req.body;
+    Animals.addAnimals(animal, (err, animal) => {
+        if (err) {
             throw err;
         }
-        res.json(animals);
+        res.json(animal);
     });
 });
+
 //Update a data in an existing element in animals
 app.patch('/animal/:_id', (req, res) => {
     let id = req.params._id;
@@ -49,6 +52,7 @@ app.patch('/animal/:_id', (req, res) => {
         res.json(animals);
     });
 });
+
 //Delete an element from animals
 app.delete('/animal/:_id', (req, res) => {
     let id = req.params._id;
@@ -67,6 +71,7 @@ app.get('/owner', (req, res) => {
         res.json(owners);
     });
 });
+
 //Get one element from owners
 app.get('/owner/:_id', (req, res) => {
     Owners.getOwnerById(req.param._id, (err, owners) => {
@@ -74,16 +79,18 @@ app.get('/owner/:_id', (req, res) => {
         res.json(owners);
     })
 });
+
 //Create new element in owners
 app.post('/owner', (req, res) => {
     let owner = req.body;
-    Owners.addOwners(owner, (err, owner) => {
+    Owners.addOwner(owner, (err, owner) => {
         if (err) {
             throw err;
         }
         res.json(owner);
     });
 });
+
 //Update a data in an existing element in owners
 app.patch('/owner/:_id', (req, res) => {
     let id = req.params._id;
@@ -93,6 +100,7 @@ app.patch('/owner/:_id', (req, res) => {
         res.json(owner);
     });
 });
+
 //Delete an element from owners
 app.delete('/owner/:_id', (req, res) => {
     let id = req.params._id;
@@ -113,6 +121,7 @@ app.listen(3001, () => {
 const dbConfig = require('./config/database.config.js');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
+
 // Connecting to the database
 mongoose.connect(dbConfig.url, {
     useNewUrlParser: true

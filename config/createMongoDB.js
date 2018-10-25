@@ -1,31 +1,31 @@
 const MongoClient = require('mongodb').MongoClient;
 const url = require('./database.config').url;
 
-/*
-*Creating the database
-*/
+/**
+ * Creating the database
+ */
 MongoClient.connect(url, function (err, db) {
     if (err) throw err;
     console.log('Database created!');
     db.close();
 });
 
-/*
-*Creating the collection: animals
-*/
+/**
+ * Creating the collection: animals
+ */
 MongoClient.connect(url, function (err, db) {
     if (err) throw err;
     let dbo = db.db("animalshelterregister");
     dbo.createCollection("animals", function (err, res) {
-            if (err) throw err;
-            console.log("Collection created!");
-            db.close();
+        if (err) throw err;
+        console.log("Collection created!");
+        db.close();
     });
 });
 
-/*
-*Creating the collection: owners
-*/
+/**
+ * Creating the collection: owners
+ */
 MongoClient.connect(url, function (err, db) {
     if (err) throw err;
     let dbo = db.db("animalshelterregister");
@@ -42,7 +42,7 @@ MongoClient.connect(url, function (err, db) {
 MongoClient.connect(url, function (err, db) {
     if (err) throw err;
     let dbo = db.db("animalshelterregister");
-    let myobjAnimal = [
+    const animals = [
         {
             adopted: false,
             name: 'Pajti',
@@ -64,9 +64,9 @@ MongoClient.connect(url, function (err, db) {
             color: 'white',
             notes: ''
         }];
-    dbo.collection("animals").insertMany(myobjAnimal, function (err, res) {
+    dbo.collection('animals').insertMany(animals, function (err, res) {
         if (err) throw err;
-        console.log("1 document inserted into animals");
+        console.log('1 document inserted into animals');
         db.close();
     });
 });
@@ -77,7 +77,7 @@ MongoClient.connect(url, function (err, db) {
 MongoClient.connect(url, function (err, db) {
     if (err) throw err;
     let dbo = db.db("animalshelterregister");
-    let ownerobj = {
+    let owner = {
         name: 'OwnerTest', 
         contact: {
             phoneNumber: '423651', address: {
@@ -89,7 +89,7 @@ MongoClient.connect(url, function (err, db) {
         },
         notes: ''
     };
-    dbo.collection("owners").insertOne(ownerobj, function (err, res) {
+    dbo.collection("owners").insertOne(owner, function (err, res) {
         if (err) throw err;
         console.log("1 document inserted into owners");
         db.close();

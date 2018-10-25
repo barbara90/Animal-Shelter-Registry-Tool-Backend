@@ -1,38 +1,40 @@
 const mongoose = require('mongoose');
 
+
 const animalSchema = mongoose.Schema({
-                name: {
-                    type: "string",
-                    required: true
-                },
-                dateOfBirth: {
-                    type: "date",
-                       required: true
-                },
-                registrationDate: {
-                    type: "date",
-                       required: true
-                },
-                breed: {
-                    type: "string",
-                    reuired: true
-                },
-                color: {
-                    type: "string",
-                    required: true
-                },
-                adopted: {
-                    type: "bool",
-                        description: "Must be a boolean, default value is false and is required"
-                },
-                chipId: {
-                    type: "string",
-                    //enum: ["dog"],itt ki kell javítani a validációt
-                    maximum: 50
-                },
-                notes: {
-                    //type: Schema.Types.Mixed
-                }
+    name: {
+        type: "string",
+        required: true
+    },
+    dateOfBirth: {
+        type: "date",
+        required: true
+    },
+    registrationDate: {
+        type: "date",
+        required: true
+    },
+    breed: {
+        type: "string",
+        reqired: true,
+
+    },
+    color: {
+        type: "string",
+        required: true
+    },
+    adopted: {
+        type: "bool"
+    },
+    chipId: {
+        type: "string",
+        maximum: 50,
+        required: function () {
+            return this.breed === 'dog';
+        }
+    },
+    notes: {
+    }
 });
 
 const Animals = mongoose.model('Animals', animalSchema);
@@ -49,8 +51,8 @@ const addAnimals = (animal, callback) => {
 }
 
 const updateAnimal = (id, animal, options, callback) => {
-    let query = { _id: id };
-    let update = {
+    const query = { _id: id };
+    const update = {
         name: animal.name,
         phoneNumber: animal.phoneNumber,
         postCode: animal.postCode,
@@ -63,7 +65,7 @@ const updateAnimal = (id, animal, options, callback) => {
 }
 
 const removeAnimal = (id, callback) => {
-    let query = { _id: id };
+    const query = { _id: id };
     Animals.remove(query, callback);
 }
 
