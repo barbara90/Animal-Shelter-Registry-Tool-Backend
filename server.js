@@ -28,14 +28,14 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
 
 // Get all the elements from animals
-app.get('/animal', (res) => {
+app.get('/animal', (req, res) => {
     Animals.getAnimals((err, animals) => {
         if(err) throw err;
         res.status(200).json(animals);
@@ -60,7 +60,7 @@ app.post('/animal', (req, res) => {
 });
 
 //Update a data in an existing element in animals
-app.patch('/animal/:_id', (req, res) => {
+app.put('/animal/:_id', (req, res) => {
     let id = req.params._id;
     let animals = req.body;
     Animals.updateAnimal(id, animals, {}, (err, animals) => {
@@ -71,7 +71,7 @@ app.patch('/animal/:_id', (req, res) => {
 
 //Delete an element from animals
 app.delete('/animal/:_id', (req, res) => {
-    let id = req.params._id;
+    let id = {_id:req.params._id};
     Animals.removeAnimal(id, (err, animals) => {
         if (err) throw err;
         res.json(animals);
@@ -104,7 +104,7 @@ app.post('/owner', (req, res) => {
 });
 
 //Update a data in an existing element in owners
-app.patch('/owner/:_id', (req, res) => {
+app.put('/owner/:_id', (req, res) => {
     let id = req.params._id;
     let owner = req.body;
     Owners.updateOwner(id, owner, {}, (err, owner) => {
@@ -115,7 +115,7 @@ app.patch('/owner/:_id', (req, res) => {
 
 //Delete an element from owners
 app.delete('/owner/:_id', (req, res) => {
-    let id = req.params._id;
+    let id = {_id: req.params._id};
     Owners.removeOwner(id, (err, owner) => {
         if (err) throw err;
         res.json(owner);

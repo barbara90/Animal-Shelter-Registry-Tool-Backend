@@ -16,7 +16,6 @@ const animalSchema = mongoose.Schema({
     breed: {
         type: "string",
         reqired: true,
-
     },
     color: {
         type: "string",
@@ -41,6 +40,7 @@ const Animals = mongoose.model('Animals', animalSchema);
 const getAnimals = (callback, limit) => {
     Animals.find(callback).limit(limit);
 }
+
 const getAnimalById = (id, callback) => {
     Animals.findById(id, callback);
 }
@@ -53,12 +53,14 @@ const updateAnimal = (id, animal, options, callback) => {
     const query = { _id: id };
     const update = {
         name: animal.name,
-        phoneNumber: animal.phoneNumber,
-        postCode: animal.postCode,
-        city: animal.city,
-        street: animal.street,
-        houseNumber: animal.houseNumber,
-        notes: animal.notes
+        adopted: animal.adopted,
+        dateOfBirth: animal.dateOfBirth,
+        registrationDate: animal.registrationDate,
+        breed: animal.breed,
+        color: animal.color,
+        chipId: animal.chipId,
+        notes: animal.notes,
+        ownerId: animal.ownerId
     }
     Animals.findOneAndUpdate(query, update, options, callback);
 }

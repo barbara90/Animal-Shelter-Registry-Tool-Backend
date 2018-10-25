@@ -48,16 +48,16 @@ const addOwner = (owner, callback) => {
 }
 
 const updateOwner = (id, owner, options, callback) => {
-        const query = {_id: id};
-        const update = {
-            name: owner.name,
-            phoneNumber: owner.phoneNumber,
-            postCode: owner.postCode,
-            city: owner.city,
-            street: owner.street,
-            houseNumber: owner.houseNumber,
-            notes: owner.notes
-        }
+    const query = {_id: id};
+    const update = {
+        name: owner.name,
+        phoneNumber: owner.phoneNumber,
+        postCode: owner.postCode,
+        city: owner.city,
+        street: owner.street,
+        houseNumber: owner.houseNumber,
+        notes: owner.notes
+    }
     Owners.findOneAndUpdate(query, update, options, callback);
 }
 

@@ -29,7 +29,7 @@ MongoClient.connect(url, function (err, db) {
 MongoClient.connect(url, function (err, db) {
     if (err) throw err;
     const dbo = db.db("animalshelterregister");
-    dbo.createCollection("owners",function (err, res) {
+    dbo.createCollection("owners", function (err, res) {
         if (err) throw err;
         console.log("Collection created!");
         db.close();
@@ -48,7 +48,7 @@ MongoClient.connect(url, function (err, db) {
             name: 'Pajti',
             dateOfBirth: '2012-01-02',
             registrationDate: '2018-01-02',
-            breed: 'Dog',
+            breed: 'dog',
             chipId: '',
             color: 'white',
             notes: ''
@@ -59,7 +59,7 @@ MongoClient.connect(url, function (err, db) {
             name: 'Cili',
             dateOfBirth: '2012-01-02',
             registrationDate: '2018-01-02',
-            breed: 'Cat',
+            breed: 'cat',
             chipId: '',
             color: 'white',
             notes: ''
