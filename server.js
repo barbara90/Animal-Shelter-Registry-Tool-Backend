@@ -26,11 +26,23 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json())
+
+//CORS
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
+
+//Error handling
+app.use(function errorHandler(err, req, res, next) {
+    if (res.headersSent) {
+        return next(err)
+    }
+    res.status(500)
+    res.render('error', { error: err })
     next();
 });
 
@@ -54,8 +66,12 @@ app.get('/animal/:_id', (req, res) => {
 app.post('/animal', (req, res) => {
     const animal = req.body;
     Animals.addAnimals(animal, (err, animal) => {
-        if (err) throw err;
-        res.status(201).json(animal);
+         try {
+            res.status(201).json(animal);
+        } catch (err) {
+            res.status(500);
+            console.log(res.status, err);
+        }
     });
 });
 
@@ -74,7 +90,7 @@ app.delete('/animal/:_id', (req, res) => {
     let id = {_id:req.params._id};
     Animals.removeAnimal(id, (err, animals) => {
         if (err) throw err;
-        res.json(animals);
+        res.status(200).json(animals);
     });
 });
 
