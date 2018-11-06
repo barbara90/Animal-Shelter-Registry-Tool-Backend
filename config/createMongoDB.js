@@ -24,19 +24,6 @@ MongoClient.connect(url, function (err, db) {
 });
 
 /**
- * Creating the collection: owners
- */
-MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    const dbo = db.db("animalshelterregister");
-    dbo.createCollection("owners", function (err, res) {
-        if (err) throw err;
-        console.log("Collection: owners created!");
-        db.close();
-    });
-});
-
-/**
  * Providing some test data for the first run into animals collection
  */
 MongoClient.connect(url, function (err, db) {
