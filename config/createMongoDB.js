@@ -37,32 +37,6 @@ MongoClient.connect(url, function (err, db) {
 });
 
 /**
- * Inserting some test data into the database collection owners
- */
-MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    const dbo = db.db("animalshelterregister");
-    const owners = {
-        name: 'OwnerTest',
-        contact: {
-            phoneNumber: '423651',
-            address: {
-                postCode: '1234',
-                city: 'Test',
-                street: 'Street',
-                houseNumber: '879'
-            }
-        },
-        notes: ''
-    };
-    dbo.collection("owners").insertOne(owners, function (err, res) {
-        if (err) throw err;
-        console.log("1 document inserted into owners");
-        db.close();
-    });
-});
-
-/**
  * Providing some test data for the first run into animals collection
  */
 MongoClient.connect(url, function (err, db) {

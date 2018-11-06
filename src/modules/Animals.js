@@ -7,11 +7,17 @@ const animalSchema = mongoose.Schema({
     },
     dateOfBirth: {
         type: "date",
-        required: true
+        required: true,
+        set: function (v) {
+            return new Date(v.getFullYear(), v.getMonth(), v.getDate());
+        }
     },
     registrationDate: {
         type: "date",
-        required: true
+        required: true,
+        set: function (v) {
+            return new Date(v.getFullYear(), v.getMonth(), v.getDate());
+        }
     },
     breed: {
         type: "string",
