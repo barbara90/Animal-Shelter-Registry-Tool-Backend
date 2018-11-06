@@ -3,8 +3,8 @@ const bodyParser = require('body-parser');
 
 // create express app
 const app = express();
-Animals = require('./src/modules/animals');
-Owners  = require('./src/modules/owners');
+Animals = require('./src/modules/Animals');
+Owners  = require('./src/modules/Owners');
 
 // Configuring the database
 const dbConfig = require('./config/database.config.js');
@@ -36,29 +36,27 @@ app.use(function (req, res, next) {
     next();
 });
 
-//Error handling
-app.use(function errorHandler(err, req, res, next) {
-    if (res.headersSent) {
-        return next(err)
-    }
-    res.status(500)
-    res.render('error', { error: err })
-    next();
-});
-
 // Get all the elements from animals
 app.get('/animal', (req, res) => {
-    Animals.getAnimals((err, animals) => {
-        if(err) throw err;
-        res.status(200).json(animals);
+    Animals.getAnimals((err, animal) => {
+        try {
+            res.status(200).json(animal);
+        } catch (err) {
+            res.status(500);
+            console.log(res.status, err);
+        }
     });
 });
 
 //Get one element from animals
 app.get('/animal/:_id', (req, res) => {
-    Animals.getAnimalById(req.params._id, (err, animals) => {
-        if (err) throw err;
-        res.status(200).json(animals);
+    Animals.getAnimalById(req.params._id, (err, animal) => {
+        try {
+            res.status(200).json(animal);
+        } catch (err) {
+            res.status(500);
+            console.log(res.status, err);
+        }
     });
 });
 
@@ -78,44 +76,64 @@ app.post('/animal', (req, res) => {
 //Update a data in an existing element in animals
 app.put('/animal/:_id', (req, res) => {
     let id = req.params._id;
-    let animals = req.body;
-    Animals.updateAnimal(id, animals, {}, (err, animals) => {
-        if (err) throw err;
-        res.json(animals);
+    let animal = req.body;
+    Animals.updateAnimal(id, animal, {}, (err, animal) => {
+        try {
+            res.status(200).json(animal);
+        } catch (err) {
+            res.status(500);
+            console.log(res.status, err);
+        }
     });
 });
 
 //Delete an element from animals
 app.delete('/animal/:_id', (req, res) => {
     let id = {_id:req.params._id};
-    Animals.removeAnimal(id, (err, animals) => {
-        if (err) throw err;
-        res.status(200).json(animals);
+    Animals.removeAnimal(id, (err, animal) => {
+        try {
+            res.status(200).json(animal);
+        } catch (err) {
+            res.status(500);
+            console.log(res.status, err);
+        }
     });
 });
 
 // Get all the elements from owners
 app.get('/owner', (req, res) => {
     Owners.getOwners((err, owners) => {
-        if(err) throw err;
-        res.json(owners);
+        try {
+            res.status(200).json(owners);
+        } catch (err) {
+            res.status(500);
+            console.log(res.status, err);
+        }
     });
 });
 
 //Get one element from owners
 app.get('/owner/:_id', (req, res) => {
     Owners.getOwnerById(req.param._id, (err, owners) => {
-        if(err) throw err;
-        res.json(owners);
-    })
+        try {
+            res.status(200).json(owners);
+        } catch (err) {
+            res.status(500);
+            console.log(res.status, err);
+        }
+    });
 });
 
 //Create new element in owners
 app.post('/owner', (req, res) => {
     let owner = req.body;
     Owners.addOwner(owner, (err, owner) => {
-        if (err) throw err;
-        res.json(owner);
+        try {
+            res.status(201).json(owners);
+        } catch (err) {
+            res.status(500);
+            console.log(res.status, err);
+        }
     });
 });
 
@@ -124,8 +142,12 @@ app.put('/owner/:_id', (req, res) => {
     let id = req.params._id;
     let owner = req.body;
     Owners.updateOwner(id, owner, {}, (err, owner) => {
-        if (err) throw err;
-        res.json(owner);
+        try {
+            res.status(200).json(owners);
+        } catch (err) {
+            res.status(500);
+            console.log(res.status, err);
+        }
     });
 });
 
@@ -133,8 +155,12 @@ app.put('/owner/:_id', (req, res) => {
 app.delete('/owner/:_id', (req, res) => {
     let id = {_id: req.params._id};
     Owners.removeOwner(id, (err, owner) => {
-        if (err) throw err;
-        res.json(owner);
+        try {
+            res.status(200).json(owners);
+        } catch (err) {
+            res.status(500);
+            console.log(res.status, err);
+        }
     });
 });
 

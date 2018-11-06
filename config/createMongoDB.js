@@ -4,11 +4,11 @@ const url = require('./database.config').url;
 /**
  * Creating the database
  */
-MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    console.log('Database created!');
-    db.close();
-});
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        console.log('Database created!');
+        db.close();
+    });
 
 /**
  * Creating the collection: animals
@@ -18,7 +18,7 @@ MongoClient.connect(url, function (err, db) {
     const dbo = db.db("animalshelterregister");
     dbo.createCollection("animals", function (err, res) {
         if (err) throw err;
-        console.log("Collection created!");
+        console.log("Collection: animals created!");
         db.close();
     });
 });
@@ -31,42 +31,7 @@ MongoClient.connect(url, function (err, db) {
     const dbo = db.db("animalshelterregister");
     dbo.createCollection("owners", function (err, res) {
         if (err) throw err;
-        console.log("Collection created!");
-        db.close();
-    });
-});
-
-/**
- * Providing some test data for the first run into animals collection
- */
-MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    const dbo = db.db("animalshelterregister");
-    const animals = [
-        {
-            adopted: false,
-            name: 'Pajti',
-            dateOfBirth: '2012-01-02',
-            registrationDate: '2018-01-02',
-            breed: 'dog',
-            chipId: '',
-            color: 'white',
-            notes: ''
-        },
-        {
-            ownerId: 0,
-            adopted: true,
-            name: 'Cili',
-            dateOfBirth: '2012-01-02',
-            registrationDate: '2018-01-02',
-            breed: 'cat',
-            chipId: '',
-            color: 'white',
-            notes: ''
-        }];
-    dbo.collection('animals').insertMany(animals, function (err) {
-        if (err) throw err;
-        console.log('1 document inserted into animals');
+        console.log("Collection: owners created!");
         db.close();
     });
 });
@@ -77,21 +42,56 @@ MongoClient.connect(url, function (err, db) {
 MongoClient.connect(url, function (err, db) {
     if (err) throw err;
     const dbo = db.db("animalshelterregister");
-    const owner = {
-        name: 'OwnerTest', 
+    const owners = {
+        name: 'OwnerTest',
         contact: {
-            phoneNumber: '423651', address: {
-                postCode: '67576',
-                city: 'hjkfd',
-                street: '87lkj',
+            phoneNumber: '423651',
+            address: {
+                postCode: '1234',
+                city: 'Test',
+                street: 'Street',
                 houseNumber: '879'
             }
         },
         notes: ''
     };
-    dbo.collection("owners").insertOne(owner, function (err, res) {
+    dbo.collection("owners").insertOne(owners, function (err, res) {
         if (err) throw err;
         console.log("1 document inserted into owners");
+        db.close();
+    });
+});
+
+/**
+ * Providing some test data for the first run into animals collection
+ */
+MongoClient.connect(url, function (err, db) {
+    if (err) throw err;
+    const dbo = db.db("animalshelterregister");
+    const owner = () => dbo.getCollection("owners").find();
+    const animals = [{
+        adopted: false,
+        name: 'Pajti',
+        dateOfBirth: '2012-01-02',
+        registrationDate: '2018-01-02',
+        breed: 'dog',
+        chipId: '123',
+        color: 'white',
+        notes: ''
+    },
+    {
+        adopted: false,
+        name: 'Cili',
+        dateOfBirth: '2012-01-02',
+        registrationDate: '2018-01-02',
+        breed: 'cat',
+        chipId: '',
+        color: 'white',
+        notes: ''
+    }];
+    dbo.collection('animals').insertMany(animals, function (err) {
+        if (err) throw err;
+        console.log('1 document inserted into animals');
         db.close();
     });
 });
