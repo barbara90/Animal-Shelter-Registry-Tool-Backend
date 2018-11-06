@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const owners = require('./Owners');
 
 const animalSchema = mongoose.Schema({
     name: {
@@ -32,6 +33,12 @@ const animalSchema = mongoose.Schema({
         }
     },
     notes: {
+    },
+    ownerId: {
+        type: "string",
+        required: function() {
+            this.ownerId == owners._id;
+        }
     }
 });
 
@@ -60,7 +67,7 @@ const updateAnimal = (id, animal, options, callback) => {
         color: animal.color,
         chipId: animal.chipId,
         notes: animal.notes,
-        ownerId: animal.ownerId
+        ownerId: animal.ownerId,
     }
     Animals.findOneAndUpdate(query, update, options, callback);
 }
