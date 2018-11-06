@@ -114,9 +114,9 @@ app.get('/owner', (req, res) => {
 
 //Get one element from owners
 app.get('/owner/:_id', (req, res) => {
-    Owners.getOwnerById(req.param._id, (err, owners) => {
+    Owners.getOwnerById(req.param._id, (err, owner) => {
         try {
-            res.status(200).json(owners);
+            res.status(200).json(owner);
         } catch (err) {
             res.status(500);
             console.log(res.status, err);
@@ -129,7 +129,7 @@ app.post('/owner', (req, res) => {
     let owner = req.body;
     Owners.addOwner(owner, (err, owner) => {
         try {
-            res.status(201).json(owners);
+            res.status(201).json(owner);
         } catch (err) {
             res.status(500);
             console.log(res.status, err);
@@ -143,7 +143,7 @@ app.put('/owner/:_id', (req, res) => {
     let owner = req.body;
     Owners.updateOwner(id, owner, {}, (err, owner) => {
         try {
-            res.status(200).json(owners);
+            res.status(200).json(owner);
         } catch (err) {
             res.status(500);
             console.log(res.status, err);
@@ -156,7 +156,7 @@ app.delete('/owner/:_id', (req, res) => {
     let id = {_id: req.params._id};
     Owners.removeOwner(id, (err, owner) => {
         try {
-            res.status(200).json(owners);
+            res.status(200).json(owner);
         } catch (err) {
             res.status(500);
             console.log(res.status, err);
